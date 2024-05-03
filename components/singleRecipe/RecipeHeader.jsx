@@ -6,6 +6,7 @@ import Favourite from "@/components/Favourite";
 
 export default async function RecipeHeader({ id }) {
     const recipe = await fetchRecipeById(id);
+
     const title = recipe?.name;
     const shareText = "Check out this amazing recipe!";
     return (

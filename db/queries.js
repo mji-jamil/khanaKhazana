@@ -5,10 +5,12 @@ import dbConnect from "@/services/mongo";
 import mongoose from "mongoose";
 
 async function createUser(user) {
+    await dbConnect();
     return await User.create(user);
 }
 
 async function findUserByCredentials(credentials) {
+    await dbConnect();
     const user = await User.findOne(credentials).lean();
     if (user) {
         return replaceMongoIdInObject(user);
@@ -17,6 +19,7 @@ async function findUserByCredentials(credentials) {
 }
 
 async function fetchRecipes() {
+    await dbConnect();
     try {
         const recipes = await Recipe.find();
         return recipes;
@@ -27,6 +30,7 @@ async function fetchRecipes() {
 }
 
 async function fetchRecipeByCategory(category) {
+    await dbConnect();
     try {
         const recipes = await Recipe.find({ category });
         return recipes;
@@ -37,6 +41,7 @@ async function fetchRecipeByCategory(category) {
 }
 
 async function fetchRecipeById(id) {
+    await dbConnect();
     try {
         const recipe = await Recipe.findById(id);
         return recipe;
@@ -47,6 +52,7 @@ async function fetchRecipeById(id) {
 }
 
 async function updateFav(recipeId, authId) {
+    await dbConnect();
     try {
         const user = await User.findById(authId);
 
