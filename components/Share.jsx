@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 export default function Share({ id, title, shareText }) {
     const [showShareOptions, setShowShareOptions] = useState(false);
-    const url = `http://localhost:3000/recipes/${id}`;
+    const url = `https://khana-khazana-mji.vercel.app/recipes/${id}`;
     const { auth } = useAuth();
     return (
         <>

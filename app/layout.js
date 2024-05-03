@@ -14,14 +14,6 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
     await dbConnect();
-    // (async () => {
-    //     try {
-    //         await dbConnect();
-    //     } catch (error) {
-    //         console.error('Error connecting to the database:', error);
-    //         // Handle the error, e.g., redirect to an error page
-    //     }
-    // })();
     return (
         <html lang="en">
             <AuthProvider>

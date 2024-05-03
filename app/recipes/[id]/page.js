@@ -12,7 +12,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
         description: product?.description.slice(0, 100),
         openGraph: {
             type: "website",
-            url: `http://localhost:3000/recipes/${id}`,
+            url: `https://khana-khazana-mji.vercel.app/recipes/${id}`,
             title: product?.name,
             description: product?.description,
             images: [
