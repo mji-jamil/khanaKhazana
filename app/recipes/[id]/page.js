@@ -1,6 +1,7 @@
 import RecipeHeader from "@/components/singleRecipe/RecipeHeader";
 import RecipeProcedure from "@/components/singleRecipe/RecipeProcedure";
 import { fetchRecipeById } from "@/db/queries";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params, searchParams }, parent) {
     const id = params.id;
@@ -31,8 +32,10 @@ export async function generateMetadata({ params, searchParams }, parent) {
 export default async function Page({ params: { id } }) {
     return (
         <>
-            <RecipeHeader id={id} />
-            <RecipeProcedure id={id} />
+            <Suspense fallback={<div>Loading...</div>}>
+                <RecipeHeader id={id} />
+                <RecipeProcedure id={id} />
+            </Suspense>
         </>
     );
 }
