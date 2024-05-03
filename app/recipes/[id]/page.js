@@ -1,0 +1,38 @@
+import RecipeHeader from "@/components/singleRecipe/RecipeHeader";
+import RecipeProcedure from "@/components/singleRecipe/RecipeProcedure";
+import { fetchRecipeById } from "@/db/queries";
+
+export async function generateMetadata({ params, searchParams }, parent) {
+    const id = params.id;
+
+    const product = await fetchRecipeById(id);
+
+    return {
+        title: product?.name.slice(0, 100),
+        description: product?.description.slice(0, 100),
+        openGraph: {
+            type: "website",
+            url: `http://localhost:3000/recipes/${id}`,
+            title: product?.name,
+            description: product?.description,
+            images: [
+                {
+                    url: product?.thumbnail,
+                    width: 1200,
+                    height: 600,
+                    alt: product?.name || "Recipe Image",
+                },
+            ],
+            site_name: "Khana Khazana",
+        },
+    };
+}
+
+export default async function Page({ params: { id } }) {
+    return (
+        <>
+            <RecipeHeader id={id} />
+            <RecipeProcedure id={id} />
+        </>
+    );
+}
