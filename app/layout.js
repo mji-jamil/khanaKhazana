@@ -12,16 +12,16 @@ export const metadata = {
         "Explore Khana Khazana and discover a world of gourmet recipes that cater to your taste and cravings. From traditional favorites to modern twists, find everything to satisfy your culinary desires.",
 };
 
-export default  function RootLayout({ children }) {
-    // await dbConnect();
-    (async () => {
-        try {
-            await dbConnect();
-        } catch (error) {
-            console.error('Error connecting to the database:', error);
-            // Handle the error, e.g., redirect to an error page
-        }
-    })();
+export default async function RootLayout({ children }) {
+    await dbConnect();
+    // (async () => {
+    //     try {
+    //         await dbConnect();
+    //     } catch (error) {
+    //         console.error('Error connecting to the database:', error);
+    //         // Handle the error, e.g., redirect to an error page
+    //     }
+    // })();
     return (
         <html lang="en">
             <AuthProvider>
