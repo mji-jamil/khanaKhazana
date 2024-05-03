@@ -3,10 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Items() {
-
     const recipes = await fetchRecipes();
-    // console.log(recipes);
-
     return (
         <>
             <div className="col-span-12 md:col-span-9">

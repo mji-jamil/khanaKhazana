@@ -1,5 +1,6 @@
 import Sidebar from "@/components/Sidebar";
 import Items from "@/components/Items";
+import { Suspense } from "react";
 
 export default function MainBody() {
     return (
@@ -7,7 +8,9 @@ export default function MainBody() {
             <section className="container py-8">
                 <div className="grid grid-cols-12 py-4">
                     <Sidebar />
-                    <Items />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Items />
+                    </Suspense>
                 </div>
             </section>
         </>
