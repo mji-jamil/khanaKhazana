@@ -1,6 +1,5 @@
-"use client";
-
-import { useState } from "react";
+"use client"
+import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { updateFav, fetchUser } from "@/db/queries";
@@ -10,16 +9,20 @@ const Favourite = ({ recipeId }) => {
     const router = useRouter();
     const [isFavourite, setIsFavourite] = useState(false);
 
-    const checkFavouriteStatus = async () => {
-        if (auth) {
-            try {
-                const user = await fetchUser(auth.id);
-                setIsFavourite(user?.favourites.includes(recipeId));
-            } catch (error) {
-                console.error("Error checking favourite status:", error);
+    useEffect(() => {
+        const fetchData = async () => {
+            if (auth) {
+                try {
+                    const user = await fetchUser(auth.id);
+                    setIsFavourite(user?.favourites.includes(recipeId));
+                } catch (error) {
+                    console.error("Error checking favourite status:", error);
+                }
             }
-        }
-    };
+        };
+
+        fetchData();
+    }, [auth, recipeId]); // Run effect when auth or recipeId changes
 
     const toggleFavourite = async () => {
         if (!auth) {
@@ -27,7 +30,6 @@ const Favourite = ({ recipeId }) => {
             return;
         }
         try {
-            await checkFavouriteStatus(); // Fetch user's favourites
             if (isFavourite) {
                 await updateFav(recipeId, auth.id, "remove");
             } else {
