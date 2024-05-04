@@ -1,8 +1,8 @@
+"use server";
 import User from "@/models/user-model";
 import { replaceMongoIdInObject } from "@/utils/data-utils";
 import Recipe from "@/models/recipe-model";
 import dbConnect from "@/services/mongo";
-import mongoose from "mongoose";
 
 async function createUser(user) {
     await dbConnect();
@@ -77,6 +77,17 @@ async function updateFav(recipeId, authId) {
     }
 }
 
+
+async function fetchUser(userId) {
+    try {
+        const user = await User.findById(userId).lean();
+        return user;
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        throw error;
+    }
+}
+
 export {
     createUser,
     findUserByCredentials,
@@ -84,4 +95,5 @@ export {
     fetchRecipeByCategory,
     fetchRecipeById,
     updateFav,
+    fetchUser
 };
