@@ -35,7 +35,7 @@ const Favourite = ({ recipeId }) => {
             } else {
                 await updateFav(recipeId, auth.id, "add");
             }
-            setIsFavourite(!isFavourite); // Toggle favourite status
+            setIsFavourite(!isFavourite);
         } catch (error) {
             console.error("Error toggling favourite:", error);
         }
