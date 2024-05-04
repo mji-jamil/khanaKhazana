@@ -22,7 +22,7 @@ const Favourite = ({ recipeId }) => {
         };
 
         fetchData();
-    }, [auth, recipeId]); // Run effect when auth or recipeId changes
+    }, [auth, recipeId]);
 
     const toggleFavourite = async () => {
         if (!auth) {
